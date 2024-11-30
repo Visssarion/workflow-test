@@ -14,6 +14,33 @@
 	    <version>5.11.3</version>
 	    <scope>test</scope>
 	</dependency>
-
   </dependencies>
+  
+  <build>
+  	<plugins>
+	  	<plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-antrun-plugin</artifactId>
+	    <version>1.8</version>
+	    <executions>
+	        <execution>
+			    <id>deploy-artifact</id>
+			    <phase>install</phase>
+			    <goals>
+			        <goal>run</goal>
+			    </goals>
+			    <configuration>
+			        <target>
+			            <ant antfile="${basedir}/build.xml">
+			                <target name="init"/>
+			                <target name="compile"/>
+			                <target name="dist"/>
+			            </ant>
+			        </target>
+			    </configuration>
+			</execution>
+	    </executions>
+	</plugin>
+  	</plugins>
+  </build>
 </project>
